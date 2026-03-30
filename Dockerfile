@@ -56,11 +56,8 @@ COPY --from=build-stage /sopds /sopds
 COPY --from=build-stage /usr/local/lib/python3.10/site-packages/ /usr/local/lib/python3.10/site-packages/
 COPY scripts/start.sh /start.sh
 
-RUN apk add --no-cache -U libxml2 libxslt libffi libjpeg zlib postgresql14 expect nginx bash
-RUN pip install supervisor --no-cache-dir
-RUN sed -i "s/DEBUG = True/DEBUG = False/g" /sopds/sopds/settings.py
-COPY configs/nginx.conf /etc/nginx/
-COPY --chmod=700 scripts/start.sh /start.sh
+RUN apk add --no-cache -U bash libxml2 libxslt libffi libjpeg zlib postgresql expect \
+    && chmod +x /start.sh
 
 WORKDIR /sopds
 
@@ -68,4 +65,3 @@ VOLUME /var/lib/pgsql
 EXPOSE 8001
 
 ENTRYPOINT ["/start.sh"]
-CMD ["supervisord", "-n", "-c", "/etc/supervisord.conf" ]
