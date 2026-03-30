@@ -1,4 +1,4 @@
-FROM python:3.10.15-alpine3.20 AS build-stage
+FROM python:3.10.9-alpine3.16 AS build-stage
 
 WORKDIR /sopds
 
@@ -12,7 +12,7 @@ RUN apk add --no-cache -U unzip \
 COPY scripts/fb2conv /fb2conv
 COPY scripts/superuser.exp .
 
-RUN apk add --no-cache -U tzdata build-base libxml2-dev libxslt-dev postgresql14-dev libffi-dev libc-dev jpeg-dev zlib-dev curl \
+RUN apk add --no-cache -U tzdata build-base libxml2-dev libxslt-dev postgresql-dev libffi-dev libc-dev jpeg-dev zlib-dev curl \
     && pip3 install --upgrade pip setuptools 'psycopg2-binary>=2.8,<2.9' \
     && pip3 install --upgrade -r requirements.txt \
     && if [ $(uname -m) = "aarch64" ]; then \
@@ -32,7 +32,7 @@ RUN apk add --no-cache -U tzdata build-base libxml2-dev libxslt-dev postgresql14
     && mkdir -p /sopds/tmp/ \
     && chmod ugo+w /sopds/tmp/
 
-FROM python:3.10.15-alpine3.20 AS production-stage
+FROM python:3.10.9-alpine3.16 AS production-stage
 
 ENV DB_USER="sopds" \
     DB_NAME="sopds" \
