@@ -28,6 +28,11 @@ docker run -d --name mysopds \
 К сожалению отключить DEBUG не получается.
 
 По умолчанию в контейнере устанавливается берлинское время. Если есть необходимость поменять, укажите желаемый часовой пояс в переменной TIME_ZONE.
+<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List" 
+   target="_blank" 
+   rel="noopener noreferrer">
+   Тётя Вика вам в помощь.
+</a>
 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List" target="_blank">Тётя Вика вам в помощь.</a>
 
 **===================================================================================**
