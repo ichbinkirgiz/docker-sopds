@@ -1,4 +1,4 @@
-#!/usr/bin/expect -f
+!/usr/bin/expect -f
 set timeout -1
 spawn python3 manage.py createsuperuser
 match_max 100000
@@ -6,19 +6,19 @@ expect -nocase "username*: "
 send -- "$env(SOPDS_SU_NAME)\r"
 expect {
     -nocase "email address: " {
-	send -- "$env(SOPDS_SU_EMAIL)\r"
-	expect -nocase "password*: "
-	send -- "$env(SOPDS_SU_PASS)\r"
-	expect -nocase "password*: "
-	send -- "$env(SOPDS_SU_PASS)\r"
-	expect {
-	    -nocase "*create user anyway?*: " {
-		send -- "y\r"
-		exp_continue
-	    }
-	}
+        send -- "$env(SOPDS_SU_EMAIL)\r"
+        expect -nocase "password*: "
+        send -- "$env(SOPDS_SU_PASS)\r"
+        expect -nocase "password*: "
+        send -- "$env(SOPDS_SU_PASS)\r"
+        expect {
+            -nocase "*create user anyway?*: " {
+                send -- "y\r"
+                exp_continue
+            }
+        }
     }
     -nocase "username is already taken" {
-	exit
+        exit
     }
 }
