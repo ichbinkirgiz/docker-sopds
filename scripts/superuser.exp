@@ -1,4 +1,4 @@
-!/usr/bin/expect -f
+#!/usr/bin/expect -f
 set timeout -1
 spawn python3 manage.py createsuperuser
 match_max 100000
